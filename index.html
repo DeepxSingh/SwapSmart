@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swapsmart - Buy, Sell, Rent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h2 {
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Swapsmart - Buy, Sell, Rent</h1>
+    <div class="container" id="step1">
+        <h2>Are you a Junior or Senior?</h2>
+        <button onclick="chooseJunior()">Junior</button>
+        <button onclick="chooseSenior()">Senior</button>
+    </div>
+
+    <!-- Junior Options -->
+    <div class="container hidden" id="junior-options">
+        <h2>What do you want to buy?</h2>
+        <button onclick="showMessage('Books', 'bought')">Books</button>
+        <button onclick="showMessage('Furniture', 'bought')">Furniture</button>
+        <button onclick="showMessage('Electronics', 'bought')">Electronics</button>
+        <button onclick="showMessage('Previous Year Notes', 'bought')">Previous Year Notes</button>
+        <button onclick="showMessage('Stationary', 'bought')">Stationary</button>
+    </div>
+
+    <!-- Senior Options -->
+    <div class="container hidden" id="senior-options">
+        <h2>What do you want to sell?</h2>
+        <button onclick="showMessage('Books', 'sold')">Books</button>
+        <button onclick="showMessage('Furniture', 'sold')">Furniture</button>
+        <button onclick="showMessage('Electronics', 'sold')">Electronics</button>
+        <button onclick="showMessage('Previous Year Notes', 'sold')">Previous Year Notes</button>
+        <button onclick="showMessage('Stationary', 'sold')">Stationary</button>
+    </div>
+
+    <!-- Message Section -->
+    <div class="container hidden" id="message">
+        <h2 id="final-message"></h2>
+        <p>Thanks for shopping with Swapsmart!!</p>
+    </div>
+
+    <script>
+        function chooseJunior() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('junior-options').classList.remove('hidden');
+        }
+
+        function chooseSenior() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('senior-options').classList.remove('hidden');
+        }
+
+        function showMessage(item, action) {
+            document.getElementById('junior-options').classList.add('hidden');
+            document.getElementById('senior-options').classList.add('hidden');
+            document.getElementById('final-message').textContent = Item ${action}: ${item};
+            document.getElementById('message').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
