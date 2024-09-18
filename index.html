@@ -7,82 +7,88 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-        }
-        h2 {
-            color: #333;
+            background-image: url('https://www.knowband.com/blog/wp-content/uploads/2017/11/main-qimg-0115da78b095e9b410d0415544093770.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        button {
+        h1 {
+            color: #4CAF50;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
             background-color: #4CAF50;
             color: white;
-            padding: 15px 20px;
-            margin: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 18px;
         }
-        button:hover {
+        .options button:hover {
             background-color: #45a049;
-        }
-        .hidden {
-            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Swapsmart - Buy, Sell, Rent</h1>
-    <div class="container" id="step1">
-        <h2>Are you a Junior or Senior?</h2>
-        <button onclick="chooseJunior()">Junior</button>
-        <button onclick="chooseSenior()">Senior</button>
-    </div>
-
-    <!-- Junior Options -->
-    <div class="container hidden" id="junior-options">
-        <h2>What do you want to buy?</h2>
-        <button onclick="showMessage('Books', 'bought')">Books</button>
-        <button onclick="showMessage('Furniture', 'bought')">Furniture</button>
-        <button onclick="showMessage('Electronics', 'bought')">Electronics</button>
-        <button onclick="showMessage('Previous Year Notes', 'bought')">Previous Year Notes</button>
-        <button onclick="showMessage('Stationary', 'bought')">Stationary</button>
-    </div>
-
-    <!-- Senior Options -->
-    <div class="container hidden" id="senior-options">
-        <h2>What do you want to sell?</h2>
-        <button onclick="showMessage('Books', 'sold')">Books</button>
-        <button onclick="showMessage('Furniture', 'sold')">Furniture</button>
-        <button onclick="showMessage('Electronics', 'sold')">Electronics</button>
-        <button onclick="showMessage('Previous Year Notes', 'sold')">Previous Year Notes</button>
-        <button onclick="showMessage('Stationary', 'sold')">Stationary</button>
-    </div>
-
-    <!-- Message Section -->
-    <div class="container hidden" id="message">
-        <h2 id="final-message"></h2>
-        <p>Thanks for shopping with Swapsmart!!</p>
+    <div class="container">
+        <h1>Welcome to Swapsmart!</h1>
+        <h2>Buy, Sell, Rent</h2>
+        <div class="options">
+            <button onclick="showOptions('junior')">Junior</button>
+            <button onclick="showOptions('senior')">Senior</button>
+        </div>
+        <div id="next-step"></div>
     </div>
 
     <script>
-        function chooseJunior() {
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('junior-options').classList.remove('hidden');
+        function showOptions(userType) {
+            const nextStep = document.getElementById('next-step');
+            let optionsHtml = '';
+
+            if (userType === 'junior') {
+                optionsHtml = `
+                    <h2>What do you want to buy?</h2>
+                    <button onclick="buyItem('Books')">Books</button>
+                    <button onclick="buyItem('Furniture')">Furniture</button>
+                    <button onclick="buyItem('Electronics')">Electronics</button>
+                    <button onclick="buyItem('Previous Year Notes')">Previous Year Notes</button>
+                    <button onclick="buyItem('Stationary')">Stationary</button>
+                `;
+            } else if (userType === 'senior') {
+                optionsHtml = `
+                    <h2>What do you want to sell?</h2>
+                    <button onclick="sellItem('Books')">Books</button>
+                    <button onclick="sellItem('Furniture')">Furniture</button>
+                    <button onclick="sellItem('Electronics')">Electronics</button>
+                    <button onclick="sellItem('Previous Year Notes')">Previous Year Notes</button>
+                    <button onclick="sellItem('Stationary')">Stationary</button>
+                `;
+            }
+
+            nextStep.innerHTML = optionsHtml;
         }
 
-        function chooseSenior() {
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('senior-options').classList.remove('hidden');
+        function buyItem(item) {
+            alert(item + ' bought! Thanks for shopping with Swapsmart!');
         }
 
-        function showMessage(item, action) {
-            document.getElementById('junior-options').classList.add('hidden');
-            document.getElementById('senior-options').classList.add('hidden');
-            document.getElementById('final-message').textContent = Item ${action}: ${item};
-            document.getElementById('message').classList.remove('hidden');
+        function sellItem(item) {
+            alert(item + ' sold! Thanks for shopping with Swapsmart!');
         }
     </script>
 </body>
